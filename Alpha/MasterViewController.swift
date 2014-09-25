@@ -38,6 +38,10 @@ class MasterViewController: UIViewController {
         
         let alpha: Float = Float(arc4random_uniform(100))
         myModel.alpha = alpha / 100
+        
+        myModel.customVar = "Hello! \(alpha)"
+        
+        binding.enabled = myModel.alpha > 0.5
     }
 
     override func didReceiveMemoryWarning() {

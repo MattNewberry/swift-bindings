@@ -2,7 +2,7 @@
 //  MyView.swift
 //  Alpha
 //
-//  Created by Matthew Newberry on 9/21/14.
+//  9/21/14
 //  Copyright (c) 2014 OpenTable. All rights reserved.
 //
 
@@ -10,6 +10,12 @@ import UIKit
 
 class MyView: UIView {
     var label: UILabel
+    
+    var customVar: String? {
+        didSet {
+            println("\(oldValue) is now \(customVar)")
+        }
+    }
     
     required init(coder aDecoder: NSCoder) {
         label = UILabel()
@@ -26,6 +32,18 @@ class MyViewModel: NSObject {
     dynamic var labelBackgroundColor: UIColor = UIColor.redColor()
     dynamic var labelText: String = "hello!"
     dynamic var labelFont: UIFont = UIFont.systemFontOfSize(15)
+    dynamic var labelTextColor: UIColor = UIColor.greenColor()
     dynamic var backgroundColor: UIColor = UIColor.blueColor()
-    dynamic var alpha: Float = 1
+    dynamic var alpha: Float = 1.0
+    dynamic var customVar: String = "custom!"
+    
+    func objectDidUpdate(obj: AnyObject!) {
+        var overdue = false
+        
+        if overdue {
+            labelBackgroundColor = UIColor.redColor()
+        } else {
+            labelBackgroundColor = UIColor.blackColor()
+        }
+    }
 }

@@ -16,39 +16,56 @@ extension Dictionary {
     }
 }
 
-class Binding: NSObject {
-    private lazy var myContext = UnsafeMutablePointer<Void>.alloc(1)
+public class Binding: NSObject {
+    private lazy var bindingContext = UnsafeMutablePointer<Void>.alloc(1)
     
-    weak var receiver: AnyObject?
-    var propertyMap: [String:String] = [String:String]()
+    public weak var receiver: AnyObject?
+    public weak var model: AnyObject?
     
-    init(receiver receiver_: AnyObject, toModel model:AnyObject) {
+    private var propertyMap: [String:String] = [String:String]()
+    private lazy var observedProperties: [String] = [String]()
+    
+    public var enabled: Bool = true {
+        didSet {
+            if enabled != oldValue {
+                for modelKey in observedProperties {
+                    if enabled {
+                        model?.addObserver(self, forKeyPath: modelKey, options: .New, context: bindingContext)
+                    } else {
+                        model?.removeObserver(self, forKeyPath: modelKey)
+                    }
+                }
+            }
+        }
+    }
+    
+    init(receiver receiver_: AnyObject, toModel model_:AnyObject) {
         super.init()
         receiver = receiver_
+        model = model_
         
         let viewProperties = propertiesForObject(receiver_)
-        let modelProperties = propertiesForObject(model, recursive: false)
-        var observing = [String]()
+        let modelProperties = propertiesForObject(model_, recursive: false)
         
         for key in viewProperties {
             for modelKey in modelProperties {
                 
-                if !contains(observing, modelKey) {
-                    model.addObserver(self, forKeyPath: modelKey, options: .New, context: myContext)
-                    observing += [modelKey]
+                if !contains(observedProperties, modelKey) {
+                    model_.addObserver(self, forKeyPath: modelKey, options: .New, context: bindingContext)
+                    observedProperties += [modelKey]
                 }
                 
                 if modelKey == key {
-                    receiver_.setValue(model.valueForKey(modelKey), forKeyPath: key)
+                    receiver_.setValue(model_.valueForKey(modelKey), forKeyPath: key)
                     propertyMap[modelKey] = key
                 } else if prefix(modelKey, countElements(key)) == key {
-                    let complete = (modelKey as NSString).substringFromIndex(countElements(key))
+                    let complete = suffix(modelKey, countElements(modelKey) - countElements(key))
                     
                     if countElements(complete) > 0 {
-                        let first = (complete as NSString).substringToIndex(1).lowercaseString
-                        let property = first + (complete as NSString).substringFromIndex(1)
+                        let first = prefix(complete, 1).lowercaseString
+                        let property = first + suffix(complete, countElements(complete) - 1)
                         let keyPath = key + "." + property
-                        receiver_.setValue(model.valueForKey(modelKey), forKeyPath: keyPath)
+                        receiver_.setValue(model_.valueForKey(modelKey), forKeyPath: keyPath)
                         propertyMap[modelKey] = keyPath
                     }
                 }
@@ -56,8 +73,8 @@ class Binding: NSObject {
         }
     }
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
-        if context == myContext {
+    override public func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+        if context == bindingContext {
             if let destKey = propertyMap[keyPath]? {
                 if let newValue: AnyObject = change[NSKeyValueChangeNewKey]? {
                     receiver!.setValue(newValue, forKeyPath: destKey)
@@ -72,8 +89,7 @@ class Binding: NSObject {
         var properties = [String]()
         
         var klasses = recursive ? klassesForKlass(obj.dynamicType) : [obj.dynamicType]
-        var offLimits = ["observationInfo"]
-                
+        
         for klass in klasses {
             var methodCount: UInt32 = 0
             var methods = class_copyMethodList(klass, &methodCount)
@@ -90,12 +106,11 @@ class Binding: NSObject {
                     
                     // join lowercase prefix to property
                     property = first + suffix(property, countElements(property) - 1)
-                    if obj.respondsToSelector(Selector(property)) && !contains(offLimits, property){
+                    if obj.respondsToSelector(Selector(property)){
                         properties += [property]
                     }
                 }
             }
-            
             free(methods)
         }
         
