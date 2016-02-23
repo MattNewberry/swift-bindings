@@ -27,11 +27,11 @@ class MasterViewController: UIViewController {
     }
     
     func doColor() {
-        let index: Int = Int(arc4random_uniform(UInt32(countElements(colors))))
+        let index: Int = Int(arc4random_uniform(UInt32(colors.count)))
         let color = colors[index]
         myModel.labelBackgroundColor = color
         
-        let index1: Int = Int(arc4random_uniform(UInt32(countElements(colors))))
+        let index1: Int = Int(arc4random_uniform(UInt32(colors.count)))
         let color1 = colors[index1]
         myModel.backgroundColor = color1
         myModel.labelFont = UIFont.systemFontOfSize(CGFloat(arc4random_uniform(50)))

@@ -13,11 +13,11 @@ class MyView: UIView {
     
     var customVar: String? {
         didSet {
-            println("\(oldValue) is now \(customVar)")
+            print("\(oldValue) is now \(customVar)")
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         label = UILabel()
         super.init(coder: aDecoder)
         self.addSubview(label)
@@ -38,7 +38,7 @@ class MyViewModel: NSObject {
     dynamic var customVar: String = "custom!"
     
     func objectDidUpdate(obj: AnyObject!) {
-        var overdue = false
+        let overdue = false
         
         if overdue {
             labelBackgroundColor = UIColor.redColor()

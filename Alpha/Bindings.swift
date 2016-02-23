@@ -50,7 +50,7 @@ public class Binding: NSObject {
         for key in viewProperties {
             for modelKey in modelProperties {
                 
-                if !contains(observedProperties, modelKey) {
+                if !observedProperties.contains(modelKey) {
                     model_.addObserver(self, forKeyPath: modelKey, options: .New, context: bindingContext)
                     observedProperties += [modelKey]
                 }
@@ -58,12 +58,12 @@ public class Binding: NSObject {
                 if modelKey == key {
                     receiver_.setValue(model_.valueForKey(modelKey), forKeyPath: key)
                     propertyMap[modelKey] = key
-                } else if prefix(modelKey, countElements(key)) == key {
-                    let complete = suffix(modelKey, countElements(modelKey) - countElements(key))
+                } else if String(modelKey.characters.prefix(key.characters.count)) == key {
+                    let complete = String(modelKey.characters.suffix(modelKey.characters.count - key.characters.count))
                     
-                    if countElements(complete) > 0 {
-                        let first = prefix(complete, 1).lowercaseString
-                        let property = first + suffix(complete, countElements(complete) - 1)
+                    if complete.characters.count > 0 {
+                        let first = String(complete.characters.prefix(1)).lowercaseString
+                        let property = first + String(complete.characters.suffix(complete.characters.count - 1))
                         let keyPath = key + "." + property
                         receiver_.setValue(model_.valueForKey(modelKey), forKeyPath: keyPath)
                         propertyMap[modelKey] = keyPath
@@ -72,11 +72,17 @@ public class Binding: NSObject {
             }
         }
     }
-    
-    override public func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+
+    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        guard
+            let keyPath = keyPath,
+            let change = change else {
+            return
+        }
+        
         if context == bindingContext {
-            if let destKey = propertyMap[keyPath]? {
-                if let newValue: AnyObject = change[NSKeyValueChangeNewKey]? {
+            if let destKey = propertyMap[keyPath] {
+                if let newValue: AnyObject = change[NSKeyValueChangeNewKey] {
                     receiver!.setValue(newValue, forKeyPath: destKey)
                 }
             }
@@ -88,24 +94,24 @@ public class Binding: NSObject {
     func propertiesForObject(obj: AnyObject, recursive: Bool = true) -> [String] {
         var properties = [String]()
         
-        var klasses = recursive ? klassesForKlass(obj.dynamicType) : [obj.dynamicType]
+        let klasses = recursive ? klassesForKlass(obj.dynamicType) : [obj.dynamicType]
         
         for klass in klasses {
             var methodCount: UInt32 = 0
-            var methods = class_copyMethodList(klass, &methodCount)
+            let methods = class_copyMethodList(klass, &methodCount)
             for i in 0..<methodCount {
                 let name = method_getName(methods[Int(i)]).description
-                if prefix(name, 3) == "set" {
-                    var property = suffix(name, countElements(name) - 3)
+                if String(name.characters.prefix(3)) == "set" {
+                    var property = String(name.characters.suffix(name.characters.count - 3))
                     
                     // remove trailing ":"
-                    property = prefix(property, countElements(property) - 1)
+                    property = String(property.characters.prefix(property.characters.count - 1))
                     
                     //lowercase first letter
-                    let first = prefix(property, 1).lowercaseString
+                    let first = String(property.characters.prefix(1)).lowercaseString
                     
                     // join lowercase prefix to property
-                    property = first + suffix(property, countElements(property) - 1)
+                    property = first + String(property.characters.suffix(property.characters.count - 1))
                     if obj.respondsToSelector(Selector(property)){
                         properties += [property]
                     }
