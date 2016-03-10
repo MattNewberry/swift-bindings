@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92683641C7BF68100F5BA03 /* AlphaFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = C92683631C7BF68100F5BA03 /* AlphaFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C92683691C7BF68900F5BA03 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9513F9219CF5C3F00AEB863 /* MyView.swift */; };
+		C926836A1C7BF68D00F5BA03 /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987263419CCE39C0071868B /* Bindings.swift */; };
 		C9513F9319CF5C3F00AEB863 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9513F9219CF5C3F00AEB863 /* MyView.swift */; };
 		C95249F319CCBD0400E5578E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95249F219CCBD0400E5578E /* AppDelegate.swift */; };
 		C95249F619CCBD0400E5578E /* Alpha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C95249F419CCBD0400E5578E /* Alpha.xcdatamodeld */; };
@@ -29,6 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C926835B1C7BF58400F5BA03 /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; };
+		C92683611C7BF68100F5BA03 /* AlphaFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlphaFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C92683631C7BF68100F5BA03 /* AlphaFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlphaFramework.h; sourceTree = "<group>"; };
+		C92683651C7BF68100F5BA03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9513F9219CF5C3F00AEB863 /* MyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		C95249ED19CCBD0400E5578E /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95249F119CCBD0400E5578E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +52,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C926835D1C7BF68100F5BA03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C95249EA19CCBD0400E5578E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -62,11 +76,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C92683621C7BF68100F5BA03 /* AlphaFramework */ = {
+			isa = PBXGroup;
+			children = (
+				C92683631C7BF68100F5BA03 /* AlphaFramework.h */,
+				C92683651C7BF68100F5BA03 /* Info.plist */,
+			);
+			path = AlphaFramework;
+			sourceTree = "<group>";
+		};
 		C95249E419CCBD0400E5578E = {
 			isa = PBXGroup;
 			children = (
 				C95249EF19CCBD0400E5578E /* Alpha */,
 				C9524A0A19CCBD0400E5578E /* AlphaTests */,
+				C92683621C7BF68100F5BA03 /* AlphaFramework */,
 				C95249EE19CCBD0400E5578E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +100,7 @@
 			children = (
 				C95249ED19CCBD0400E5578E /* Alpha.app */,
 				C9524A0719CCBD0400E5578E /* AlphaTests.xctest */,
+				C92683611C7BF68100F5BA03 /* AlphaFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,6 +111,7 @@
 				C95249F219CCBD0400E5578E /* AppDelegate.swift */,
 				C95249F719CCBD0400E5578E /* MasterViewController.swift */,
 				C9513F9219CF5C3F00AEB863 /* MyView.swift */,
+				C926835B1C7BF58400F5BA03 /* Tests.playground */,
 				C987263419CCE39C0071868B /* Bindings.swift */,
 				C95249FB19CCBD0400E5578E /* Main.storyboard */,
 				C95249FE19CCBD0400E5578E /* Images.xcassets */,
@@ -123,7 +149,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		C926835E1C7BF68100F5BA03 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C92683641C7BF68100F5BA03 /* AlphaFramework.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		C92683601C7BF68100F5BA03 /* AlphaFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C92683661C7BF68100F5BA03 /* Build configuration list for PBXNativeTarget "AlphaFramework" */;
+			buildPhases = (
+				C926835C1C7BF68100F5BA03 /* Sources */,
+				C926835D1C7BF68100F5BA03 /* Frameworks */,
+				C926835E1C7BF68100F5BA03 /* Headers */,
+				C926835F1C7BF68100F5BA03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AlphaFramework;
+			productName = AlphaFramework;
+			productReference = C92683611C7BF68100F5BA03 /* AlphaFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		C95249EC19CCBD0400E5578E /* Alpha */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9524A1119CCBD0400E5578E /* Build configuration list for PBXNativeTarget "Alpha" */;
@@ -170,6 +225,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = OpenTable;
 				TargetAttributes = {
+					C92683601C7BF68100F5BA03 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					C95249EC19CCBD0400E5578E = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
@@ -194,11 +252,19 @@
 			targets = (
 				C95249EC19CCBD0400E5578E /* Alpha */,
 				C9524A0619CCBD0400E5578E /* AlphaTests */,
+				C92683601C7BF68100F5BA03 /* AlphaFramework */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C926835F1C7BF68100F5BA03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C95249EB19CCBD0400E5578E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -219,6 +285,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C926835C1C7BF68100F5BA03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C92683691C7BF68900F5BA03 /* MyView.swift in Sources */,
+				C926836A1C7BF68D00F5BA03 /* Bindings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C95249E919CCBD0400E5578E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +344,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C92683671C7BF68100F5BA03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AlphaFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opentable.AlphaFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C92683681C7BF68100F5BA03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AlphaFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.opentable.AlphaFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		C9524A0F19CCBD0400E5578E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -353,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opentable.$(PRODUCT_NAME:rfc1034identifier)";
@@ -364,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Alpha/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opentable.$(PRODUCT_NAME:rfc1034identifier)";
@@ -410,6 +532,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C92683661C7BF68100F5BA03 /* Build configuration list for PBXNativeTarget "AlphaFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C92683671C7BF68100F5BA03 /* Debug */,
+				C92683681C7BF68100F5BA03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		C95249E819CCBD0400E5578E /* Build configuration list for PBXProject "Alpha" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

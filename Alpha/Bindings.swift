@@ -39,7 +39,7 @@ public class Binding: NSObject {
         }
     }
     
-    init(receiver receiver_: AnyObject, toModel model_:AnyObject) {
+    public init(receiver receiver_: AnyObject, toModel model_:AnyObject) {
         super.init()
         receiver = receiver_
         model = model_
@@ -112,6 +112,7 @@ public class Binding: NSObject {
                     
                     // join lowercase prefix to property
                     property = first + String(property.characters.suffix(property.characters.count - 1))
+                    print(property)
                     if obj.respondsToSelector(Selector(property)){
                         properties += [property]
                     }
